@@ -2,7 +2,7 @@
 
 - ### clone this project
 ```
-asdasd
+git clone https://github.com/Zerodayu/ranters-org.git
 ```
 
 
