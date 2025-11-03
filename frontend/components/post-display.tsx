@@ -98,13 +98,13 @@ export default function ShowPost() {
           {PostData.map((post) => (
             <div key={post.id} className='w-full border border-dashed'>
               <div className='w-full p-4'>
-                <span className='flex gap-2 font-semibold pb-4'>
+                <span className='flex gap-2 font-semibold text-muted-foreground pb-4'>
                   <CircleUser />
                   <h1>Person-{post.postId}</h1>
                 </span>
                 <div>
-                  <h1 className='text-primary-foreground font-semibold text-lg'>{post.title}</h1>
-                  <p className='text-primary-foreground'>{post.content}</p>
+                  <h1 className='text-secondary-foreground font-semibold text-lg'>{post.title}</h1>
+                  <p className='text-secondary-foreground'>{post.content}</p>
                 </div>
                 <div className='pt-4'>
                   <Button

@@ -1,4 +1,5 @@
 import { Button } from "./ui/button";
+import ThemeSwitch from "./theme-toggle";
 import {
   Hexagon,
   LogIn
@@ -13,7 +14,8 @@ export default function Navbar() {
           Ranterr
         </span>
       </div>
-      <div>
+      <div className='flex items-center gap-2'>
+        <ThemeSwitch />
         <Button variant="secondary">
           <LogIn />
           Sign-in
