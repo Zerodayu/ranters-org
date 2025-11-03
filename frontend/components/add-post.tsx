@@ -5,7 +5,7 @@ import { Plus } from "lucide-react";
 export default function PostBtn() {
   return (
     <div>
-      <Button className='w-full'>
+      <Button variant="outline" className='w-full'>
         <Plus />
         Add Post
       </Button>

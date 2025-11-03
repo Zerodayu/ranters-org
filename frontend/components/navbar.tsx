@@ -16,7 +16,7 @@ export default function Navbar() {
       </div>
       <div className='flex items-center gap-2'>
         <ThemeSwitch />
-        <Button variant="secondary">
+        <Button>
           <LogIn />
           Sign-in
         </Button>
