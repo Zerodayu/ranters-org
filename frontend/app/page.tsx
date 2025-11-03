@@ -17,9 +17,8 @@ export default function Home() {
         </div>
 
         <div className="flex justify-center border-b border-dashed">
-          <div className="w-[80vw] border-x border-dashed p-4">
+          <div className="w-[80vw] border-x border-dashed">
             {/* Posts will go here */}
-            <ShowPost />
             <ShowPost />
           </div>
         </div>

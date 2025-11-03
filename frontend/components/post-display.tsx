@@ -3,11 +3,19 @@
 import React, { useState } from 'react'
 
 import { Button } from './ui/button';
+import { Toggle } from './ui/toggle';
 import {
   CircleUser,
   Star,
-  Download
+  Download,
+  ArrowDownUp,
+  CircleStar,
+  ClockFading
 } from "lucide-react";
+import {
+  ToggleGroup,
+  ToggleGroupItem,
+} from "@/components/ui/toggle-group"
 
 const PostData = [
   {
@@ -66,38 +74,56 @@ export default function ShowPost() {
 
   return (
     <>
-      <section className='flex flex-col gap-4'>
-        <div>
-          <h1 className='text-2xl font-bold pb-4'>Recent Posts</h1>
+      <section>
+        <div className='sticky top-13 w-full flex justify-between'>
+          <div className='backdrop-blur'>
+            <ToggleGroup type="single">
+              <ToggleGroupItem value="popular" aria-label="Toggle popular">
+                <CircleStar />
+                Popular
+              </ToggleGroupItem>
+              <ToggleGroupItem value="recent" aria-label="Toggle recent">
+                <ClockFading />
+                Recent
+              </ToggleGroupItem>
+            </ToggleGroup>
+          </div>
+          <div className='backdrop-blur-sm'>
+            <Toggle>
+              <ArrowDownUp />
+            </Toggle>
+          </div>
         </div>
-        {PostData.map((post) => (
-          <div key={post.id} className='w-full border border-dashed'>
-            <div className='w-full p-4'>
-              <span className='flex gap-2 font-semibold pb-4'>
-                <CircleUser />
-                <h1>Person-{post.postId}</h1>
-              </span>
-              <div>
-                <h1 className='text-primary-foreground font-semibold text-lg'>{post.title}</h1>
-                <p className='text-primary-foreground'>{post.content}</p>
-              </div>
-              <div className='pt-4'>
-                <Button 
-                  variant="ghost" 
-                  onClick={() => toggleStarFill(post.id)}
-                >
-                  <Star fill={starFills[post.id] ? "var(--foreground)" : "none"} 
-                            stroke="var(--foreground)" />
-                  <span>{post.likes}</span>
-                </Button>
-                <Button variant="ghost">
-                  <Download />
-                  <span>Save</span>
-                </Button>
+        <div className='flex flex-col gap-4 p-4'>
+          {PostData.map((post) => (
+            <div key={post.id} className='w-full border border-dashed'>
+              <div className='w-full p-4'>
+                <span className='flex gap-2 font-semibold pb-4'>
+                  <CircleUser />
+                  <h1>Person-{post.postId}</h1>
+                </span>
+                <div>
+                  <h1 className='text-primary-foreground font-semibold text-lg'>{post.title}</h1>
+                  <p className='text-primary-foreground'>{post.content}</p>
+                </div>
+                <div className='pt-4'>
+                  <Button
+                    variant="ghost"
+                    onClick={() => toggleStarFill(post.id)}
+                  >
+                    <Star fill={starFills[post.id] ? "var(--foreground)" : "none"}
+                      stroke="var(--foreground)" />
+                    <span>{post.likes}</span>
+                  </Button>
+                  <Button variant="ghost">
+                    <Download />
+                    <span>Save</span>
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </section>
     </>
   )
