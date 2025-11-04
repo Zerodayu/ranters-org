@@ -75,8 +75,8 @@ export default function ShowPost() {
   return (
     <>
       <section>
-        <div className='sticky top-13 w-full flex justify-between'>
-          <div className='backdrop-blur'>
+        <div className='w-full flex flex-1 justify-between'>
+          <div>
             <ToggleGroup type="single">
               <ToggleGroupItem value="popular" aria-label="Toggle popular">
                 <CircleStar />

@@ -7,11 +7,13 @@ import {
 
 export default function Navbar() {
   return (
-    <section className='flex w-[80vw] border-x border-dashed justify-between items-center py-2 px-6'>
+    <section className='flex border-x border-dashed justify-between items-center py-2 px-6 container-w'>
       <div>
         <span className='flex items-center gap-2 font-bold text-2xl'>
           <Hexagon />
-          Ranterr
+          <span className="">
+            Ranterr
+          </span>
         </span>
       </div>
       <div className='flex items-center gap-2'>
