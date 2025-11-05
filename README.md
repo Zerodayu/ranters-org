@@ -16,7 +16,7 @@ cd backend
 npm install
 ```
 
-- ### run project (backend> || frontend>)
+- ### run project 
 ```
 npm run dev
 ```
