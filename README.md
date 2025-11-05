@@ -8,13 +8,10 @@ git clone https://github.com/Zerodayu/ranters-org.git
 
 - ### install packages
 ```
-cd frontend 
-
-# or
-cd backend
+npm install
 ```
 
-- ### run project (backend> || frontend>)
+- ### run project 
 ```
 npm run dev
 ```
