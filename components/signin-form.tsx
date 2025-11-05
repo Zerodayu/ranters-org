@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 
-export function SignupForm({
+export function SigninForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
@@ -21,9 +21,9 @@ export function SignupForm({
           <form className="p-6 md:p-8">
             <FieldGroup>
               <div className="flex flex-col items-center gap-2 text-center">
-                <h1 className="text-2xl font-bold">Create your account</h1>
+                <h1 className="text-2xl font-bold">Welcome back!</h1>
                 <p className="text-muted-foreground text-sm text-balance">
-                  Enter your username below to create your account
+                  Login to your account to continue.
                 </p>
               </div>
               <Field>
@@ -34,35 +34,21 @@ export function SignupForm({
                   placeholder="myUsername"
                   required
                 />
-                <FieldDescription>
-                  You&apos;ll use this for logging in.
-                </FieldDescription>
               </Field>
-              <Field>
-                <Field className="grid grid-cols-1 gap-4">
-                  <Field>
-                    <FieldLabel htmlFor="password">Password</FieldLabel>
-                    <Input id="password" type="password" required />
-                  </Field>
-                  <Field>
-                    <FieldLabel htmlFor="confirm-password">
-                      Confirm Password
-                    </FieldLabel>
-                    <Input id="confirm-password" type="password" required />
-                  </Field>
+              <Field className="grid grid-cols-1 gap-4">
+                <Field>
+                  <FieldLabel htmlFor="password">Password</FieldLabel>
+                  <Input id="password" type="password" required />
                 </Field>
-                <FieldDescription>
-                  Must be at least 8 characters long.
-                </FieldDescription>
               </Field>
               <Field>
-                <Button type="submit">Create Account</Button>
+                <Button type="submit">Login</Button>
               </Field>
               <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
-                Already have an account?
+                Dont have an account?
               </FieldSeparator>
               <FieldDescription className="text-center">
-                <a href="/sign-in">Sign in</a>
+                <a href="/sign-up">Sign uo</a>
               </FieldDescription>
             </FieldGroup>
           </form>

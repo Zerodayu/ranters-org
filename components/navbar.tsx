@@ -1,4 +1,5 @@
 import { Button } from "./ui/button";
+import Link from "next/link";
 import ThemeSwitch from "./theme-toggle";
 import {
   Hexagon,
@@ -18,10 +19,12 @@ export default function Navbar() {
       </div>
       <div className='flex items-center gap-2'>
         <ThemeSwitch />
-        <Button>
-          <LogIn />
-          Sign-in
-        </Button>
+        <Link href="/signup">
+          <Button>
+            <LogIn />
+            Sign-in
+          </Button>
+        </Link>
       </div>
     </section>
   )
