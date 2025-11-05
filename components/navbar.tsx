@@ -19,7 +19,7 @@ export default function Navbar() {
       </div>
       <div className='flex items-center gap-2'>
         <ThemeSwitch />
-        <Link href="/signup">
+        <Link href="/sign-in">
           <Button>
             <LogIn />
             Sign-in
