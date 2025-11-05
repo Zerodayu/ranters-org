@@ -99,7 +99,7 @@ export default function Onboarding() {
                                 >
                                     Next
                                     <ArrowRightIcon
-                                        className="-me-1 opacity-60 transition-transform group-hover:translate-x-0.5"
+                                        className="opacity-60 transition-transform group-hover:translate-x-0.5"
                                         size={16}
                                         aria-hidden="true"
                                     />
