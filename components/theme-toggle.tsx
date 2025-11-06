@@ -1,41 +1,33 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import { MoonIcon, SunIcon } from "lucide-react"
 import { Toggle } from "@/components/ui/toggle"
+import { useTheme } from "./theme-provider"
 
-export default function ThemeSwitch() {
-  const [theme, setTheme] = useState<string>("dark")
+export default function ThemeToggle() {
+  const { theme, setTheme } = useTheme()
 
-  useEffect(() => {
-    // Update the HTML class when theme changes
-    const root = document.documentElement
-    if (theme === "dark") {
-      root.classList.add("dark")
-      root.classList.remove("light")
-    } else {
-      root.classList.add("light")
-      root.classList.remove("dark")
-    }
-  }, [theme])
+  const isDark =
+    theme === "dark" ||
+    (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches)
 
   return (
-    <div>
+    <div className="relative">
       <Toggle
         variant="default"
         className="group size-9 data-[state=on]:bg-transparent data-[state=on]:hover:bg-muted"
-        pressed={theme === "dark"}
+        pressed={isDark}
         onPressedChange={() =>
-          setTheme((prev) => (prev === "dark" ? "light" : "dark"))
+          setTheme(isDark ? "light" : "dark")
         }
-        aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+        aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
       >
-        <MoonIcon
+        <SunIcon
           size={16}
           className="shrink-0 scale-0 opacity-0 transition-all group-data-[state=on]:scale-100 group-data-[state=on]:opacity-100"
           aria-hidden="true"
         />
-        <SunIcon
+        <MoonIcon
           size={16}
           className="absolute shrink-0 scale-100 opacity-100 transition-all group-data-[state=on]:scale-0 group-data-[state=on]:opacity-0"
           aria-hidden="true"
