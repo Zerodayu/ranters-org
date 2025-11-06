@@ -2,7 +2,7 @@
 import { Button } from "./ui/button";
 import Link from "next/link";
 import ThemeSwitch from "./theme-toggle";
-import { logoutAction } from "@/lib/logout-action";
+import UserButton from "./userBtn";
 import {
   Auth,
   SignedIn,
@@ -30,11 +30,7 @@ export default function Navbar() {
 
         <Auth>
           <SignedIn>
-            <form action={logoutAction}>
-              <Button >
-                Logout
-              </Button>
-            </form>
+              <UserButton />
           </SignedIn>
           <SignedOut>
             <Link href="/sign-in">
