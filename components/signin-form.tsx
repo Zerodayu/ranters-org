@@ -28,7 +28,7 @@ export function SigninForm({
   const [state, formAction] = useActionState(loginAction, initialState)
 
   if (state.success) {
-    router.push("/dashboard")
+    router.push("/")
     return null
   }
 
