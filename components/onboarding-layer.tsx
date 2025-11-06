@@ -1,7 +1,7 @@
 "use client"
 
 import { cn } from "@/lib/utils"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "./ui/button"
 import {
     AlertDialog,
@@ -18,6 +18,19 @@ import { ArrowRightIcon } from "lucide-react"
 
 export default function Onboarding() {
     const [step, setStep] = useState(1)
+    const [showModal, setShowModal] = useState(false)
+
+    useEffect(() => {
+        const lastShown = localStorage.getItem('onboardingLastShown')
+        const currentTime = new Date().getTime()
+        const sevenDays = 7 * 24 * 60 * 60 * 1000 // 7 days in milliseconds
+
+        if (!lastShown || currentTime - parseInt(lastShown) > sevenDays) {
+            setShowModal(true)
+            localStorage.setItem('onboardingLastShown', currentTime.toString())
+        }
+    }, [])
+
     const stepContent = [
         {
             title: "Welcome to coss.com",
@@ -55,11 +68,16 @@ export default function Onboarding() {
         }
     }
 
+    const handleClose = () => {
+        setShowModal(false)
+    }
+
     return (
         <AlertDialog
-            defaultOpen={true}
+            open={showModal}
             onOpenChange={(open) => {
                 if (open) setStep(1)
+                if (!open) handleClose()
             }}
         >
             {/* <AlertDialogTrigger asChild>
@@ -106,7 +124,7 @@ export default function Onboarding() {
                                 </Button>
                             ) : (
                                 <AlertDialogCancel asChild>
-                                    <Button type="button">Okay</Button>
+                                    <Button type="button" onClick={handleClose}>Okay</Button>
                                 </AlertDialogCancel>
                             )}
                         </AlertDialogFooter>
@@ -114,8 +132,5 @@ export default function Onboarding() {
                 </div>
             </AlertDialogContent>
         </AlertDialog>
-
-
-
     );
 };
