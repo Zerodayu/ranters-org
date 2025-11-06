@@ -2,11 +2,13 @@
 
 import { PrismaClient, Prisma } from '@prisma/client'
 import { hash } from 'bcrypt-ts'
+import { isValidEmail } from '@/utils/input-validations'
 
 const prisma = new PrismaClient();
 const SALT_ROUNDS = 10;
 
 interface CreateUserInput {
+  email: string;
   username: string;
   password: string; // Changed from passwordHash to password
 }
@@ -20,21 +22,34 @@ interface CreateUserResponse {
 export async function createUser(input: CreateUserInput): Promise<CreateUserResponse> {
   try {
     // Validate input
-    if (!input.username || !input.password) {
-      throw new Error('Username and password are required');
+    if (!input.username || !input.password || !input.email) {
+      throw new Error('Username, password and email are required');
     }
 
-    // Check if username already exists
-    const existingUser = await prisma.user.findUnique({
+    // Use shared email validation
+    if (!isValidEmail(input.email)) {
+      return {
+        success: false,
+        error: 'Invalid email format'
+      };
+    }
+
+    // Check if username or email already exists
+    const existingUser = await prisma.user.findFirst({
       where: {
-        username: input.username
+        OR: [
+          { username: input.username },
+          { email: input.email }
+        ]
       }
     });
 
     if (existingUser) {
       return {
         success: false,
-        error: 'Username already exists'
+        error: existingUser.email === input.email 
+          ? 'Email already exists' 
+          : 'Username already exists'
       };
     }
 
@@ -44,6 +59,7 @@ export async function createUser(input: CreateUserInput): Promise<CreateUserResp
     const newUser = await prisma.user.create({
       data: {
         username: input.username.trim(),
+        email: input.email.trim().toLowerCase(), // Store email in lowercase
         passwordHash: passwordHash
       }
     });

@@ -49,12 +49,12 @@ export function SigninForm({
                 </p>
               </div>
               <Field>
-                <FieldLabel htmlFor="username">Username</FieldLabel>
+                <FieldLabel htmlFor="email">Email</FieldLabel>
                 <Input
-                  id="username"
-                  name="username"
+                  id="email"
+                  name="email"
                   type="text"
-                  placeholder="myUsername"
+                  placeholder="myEmail@example.com"
                   required
                 />
               </Field>

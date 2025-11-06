@@ -10,14 +10,14 @@ export type State = {
 
 export async function loginAction(prevState: State, formData: FormData): Promise<State> {
   try {
-    const username = formData.get("username") as string
+    const email = formData.get("email") as string
     const password = formData.get("password") as string
 
-    if (!username || !password) {
-      return { error: "Username and password are required" }
+    if (!email || !password) {
+      return { error: "Email and password are required" }
     }
 
-    const response = await loginUser({ username, password })
+    const response = await loginUser({ email, password })
 
     if (!response.success) {
       return { error: response.error, success: false }

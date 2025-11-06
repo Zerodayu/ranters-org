@@ -20,6 +20,7 @@ export function SignupForm({
   ...props
 }: React.ComponentProps<"div">) {
   const [formData, setFormData] = useState({
+    email: "",
     username: "",
     password: "",
     confirmPassword: "",
@@ -52,10 +53,11 @@ export function SignupForm({
         throw new Error("Password must be at least 8 characters long")
       }
 
-      // Create user with plain password for now
+      // Create user with all required fields
       const response = await createUser({
+        email: formData.email,
         username: formData.username,
-        password: formData.password // This will be replaced with hashed password later
+        password: formData.password
       })
 
       if (!response.success) {
@@ -81,25 +83,37 @@ export function SignupForm({
               <div className="flex flex-col items-center gap-2 text-center">
                 <h1 className="text-2xl font-bold">Create your account</h1>
                 <p className="text-muted-foreground text-sm text-balance">
-                  Enter your username below to create your account
+                  Enter your details below to create your account
                 </p>
               </div>
               <Field>
-                <FieldLabel htmlFor="username">Username</FieldLabel>
+                <FieldLabel htmlFor="email">Email</FieldLabel>
                 <Input
-                  id="username"
-                  type="text"
-                  placeholder="myUsername"
+                  id="email"
+                  type="email"
+                  placeholder="you@example.com"
                   required
-                  value={formData.username}
+                  value={formData.email}
                   onChange={handleInputChange}
                 />
                 <FieldDescription>
                   You&apos;ll use this for logging in.
                 </FieldDescription>
               </Field>
+
               <Field>
                 <Field className="grid grid-cols-1 gap-4">
+                  <Field>
+                    <FieldLabel htmlFor="username">Username</FieldLabel>
+                    <Input
+                      id="username"
+                      type="text"
+                      placeholder="myUsername"
+                      required
+                      value={formData.username}
+                      onChange={handleInputChange}
+                    />
+                  </Field>
                   <Field>
                     <FieldLabel htmlFor="password">Password</FieldLabel>
                     <Input
@@ -111,11 +125,11 @@ export function SignupForm({
                     />
                   </Field>
                   <Field>
-                    <FieldLabel htmlFor="confirm-password">
+                    <FieldLabel htmlFor="confirmPassword">
                       Confirm Password
                     </FieldLabel>
                     <Input
-                      id="confirm-password"
+                      id="confirmPassword"
                       type="password"
                       required
                       value={formData.confirmPassword}

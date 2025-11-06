@@ -2,11 +2,12 @@
 
 import { PrismaClient } from '@prisma/client'
 import { compare } from 'bcrypt-ts'
+import { isValidEmail } from '@/utils/input-validations'
 
 const prisma = new PrismaClient()
 
 interface LoginInput {
-  username: string
+  email: string
   password: string
 }
 
@@ -14,7 +15,8 @@ interface LoginResponse {
   success: boolean
   user?: {
     id: number
-    username: string
+    username: string | null
+    email: string
   }
   error?: string
 }
@@ -22,21 +24,29 @@ interface LoginResponse {
 export async function loginUser(input: LoginInput): Promise<LoginResponse> {
   try {
     // Validate input
-    if (!input.username || !input.password) {
-      throw new Error('Username and password are required')
+    if (!input.email || !input.password) {
+      throw new Error('Email and password are required')
     }
 
-    // Find user by username
+    // Use shared email validation
+    if (!isValidEmail(input.email)) {
+      return {
+        success: false,
+        error: 'Invalid email format'
+      };
+    }
+
+    // Find user by email (using lowercase to match storage format)
     const user = await prisma.user.findUnique({
       where: {
-        username: input.username
+        email: input.email.trim().toLowerCase()
       }
     })
 
     if (!user) {
       return {
         success: false,
-        error: 'Invalid username or password'
+        error: 'Invalid email or password'
       }
     }
 
@@ -46,7 +56,7 @@ export async function loginUser(input: LoginInput): Promise<LoginResponse> {
     if (!isValidPassword) {
       return {
         success: false,
-        error: 'Invalid username or password'
+        error: 'Invalid email or password'
       }
     }
 
