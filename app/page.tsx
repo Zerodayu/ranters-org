@@ -2,6 +2,11 @@ import Navbar from "@/components/navbar";
 import PostBtn from "@/components/add-post";
 import ShowPost from "@/components/post-display";
 import Onboarding from "@/components/onboarding-layer";
+import {
+  Auth,
+  SignedIn,
+  SignedOut
+} from '@/components/useAuth'
 
 export default function Home() {
   return (
@@ -12,11 +17,18 @@ export default function Home() {
             <Navbar />
           </div>
 
+      <Auth>
+        <SignedIn>
           <div className="flex justify-center border-b border-dashed">
             <div className="container-w border-x border-dashed p-4">
               <PostBtn />
             </div>
           </div>
+        </SignedIn>
+        <SignedOut>
+          <></>
+        </SignedOut>
+      </Auth>
 
           <div className="flex justify-center border-b border-dashed">
             <div className="md:w-full lg:w-[80vw] border-x border-dashed">

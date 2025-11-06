@@ -88,7 +88,7 @@ export default function ShowPost() {
               </ToggleGroupItem>
             </ToggleGroup>
           </div>
-          <div className='backdrop-blur-sm'>
+          <div>
             <Toggle>
               <ArrowDownUp />
             </Toggle>
