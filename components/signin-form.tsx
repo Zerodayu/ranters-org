@@ -77,7 +77,7 @@ export function SigninForm({
                 Don&apos;t have an account?
               </FieldSeparator>
               <FieldDescription className="text-center">
-                <a href="/sign-up">Sign up</a>
+                <a href="/sign-up">Create Account</a>
               </FieldDescription>
             </FieldGroup>
           </form>

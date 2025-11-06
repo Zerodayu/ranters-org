@@ -115,7 +115,7 @@ export function SignupForm({
                       Confirm Password
                     </FieldLabel>
                     <Input
-                      id="confirmPassword"
+                      id="confirm-password"
                       type="password"
                       required
                       value={formData.confirmPassword}

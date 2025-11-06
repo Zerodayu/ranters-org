@@ -13,8 +13,12 @@ export default function SignupPage() {
           Home
         </Link>
         <ChevronRight size={18} />
+        <Link href="/sign-in" className="font-semibold hover:underline">
+          Sign-in
+        </Link>
+        <ChevronRight size={18} />
         <h1 className="font-semibold text-muted-foreground">
-          Sign-up
+          Create Account
         </h1>
       </div>
       <div className="flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
