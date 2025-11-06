@@ -1,12 +1,14 @@
 "use server"
 
 import { PrismaClient, Prisma } from '@prisma/client'
+import { hash } from 'bcrypt-ts'
 
 const prisma = new PrismaClient();
+const SALT_ROUNDS = 10;
 
 interface CreateUserInput {
   username: string;
-  passwordHash: string;
+  password: string; // Changed from passwordHash to password
 }
 
 interface CreateUserResponse {
@@ -16,11 +18,10 @@ interface CreateUserResponse {
 }
 
 export async function createUser(input: CreateUserInput): Promise<CreateUserResponse> {
-
   try {
     // Validate input
-    if (!input.username || !input.passwordHash) {
-      throw new Error('Username and password hash are required');
+    if (!input.username || !input.password) {
+      throw new Error('Username and password are required');
     }
 
     // Check if username already exists
@@ -37,16 +38,22 @@ export async function createUser(input: CreateUserInput): Promise<CreateUserResp
       };
     }
 
+    // Hash the password
+    const passwordHash = await hash(input.password, SALT_ROUNDS);
+
     const newUser = await prisma.user.create({
       data: {
         username: input.username.trim(),
-        passwordHash: input.passwordHash
+        passwordHash: passwordHash
       }
     });
 
+    // Remove passwordHash from the returned user object
+    const { passwordHash: _, ...userWithoutPassword } = newUser;
+
     return {
       success: true,
-      user: newUser
+      user: userWithoutPassword
     };
 
   } catch (error) {

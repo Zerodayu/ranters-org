@@ -55,7 +55,7 @@ export function SignupForm({
       // Create user with plain password for now
       const response = await createUser({
         username: formData.username,
-        passwordHash: formData.password // This will be replaced with hashed password later
+        password: formData.password // This will be replaced with hashed password later
       })
 
       if (!response.success) {
@@ -63,7 +63,7 @@ export function SignupForm({
       }
 
       // Redirect to login or dashboard
-      window.location.href = "/"
+      window.location.href = "/sign-in"
 
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to create account")
