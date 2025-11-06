@@ -1,10 +1,18 @@
+
 import { Button } from "./ui/button";
 import Link from "next/link";
 import ThemeSwitch from "./theme-toggle";
+import { logoutAction } from "@/lib/logout-action";
+import {
+  Auth,
+  SignedIn,
+  SignedOut
+} from '@/components/useAuth'
 import {
   Hexagon,
   LogIn
 } from "lucide-react";
+
 
 export default function Navbar() {
   return (
@@ -19,12 +27,24 @@ export default function Navbar() {
       </div>
       <div className='flex items-center gap-2'>
         <ThemeSwitch />
-        <Link href="/sign-in">
-          <Button>
-            <LogIn />
-            Sign-in
-          </Button>
-        </Link>
+
+        <Auth>
+          <SignedIn>
+            <form action={logoutAction}>
+              <Button >
+                Logout
+              </Button>
+            </form>
+          </SignedIn>
+          <SignedOut>
+            <Link href="/sign-in">
+              <Button>
+                <LogIn />
+                Sign-in
+              </Button>
+            </Link>
+          </SignedOut>
+        </Auth>
       </div>
     </section>
   )

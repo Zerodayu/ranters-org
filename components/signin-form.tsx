@@ -2,6 +2,7 @@
 
 import { useActionState } from "react"
 import { useRouter } from "next/navigation"
+import { useEffect } from "react" // Add this import
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -27,11 +28,14 @@ export function SigninForm({
   const router = useRouter()
   const [state, formAction] = useActionState(loginAction, initialState)
 
-  if (state.success) {
-    router.push("/")
-    return null
-  }
+  // Add useEffect to handle navigation
+  useEffect(() => {
+    if (state.success) {
+      router.push("/")
+    }
+  }, [state.success, router])
 
+  // Remove the direct navigation and return
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="overflow-hidden p-0">
