@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Source_Code_Pro, Geist_Mono } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
 const sourceCodePro = Source_Code_Pro({
@@ -27,7 +28,9 @@ export default function RootLayout({
       <body
         className={`${sourceCodePro.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
