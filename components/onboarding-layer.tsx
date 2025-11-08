@@ -3,6 +3,8 @@
 import { cn } from "@/lib/utils"
 import { useState, useEffect } from "react"
 import { Button } from "./ui/button"
+import { ArrowRightIcon } from "lucide-react"
+import { onboardingSteps } from "./static/onboardings"
 import {
     AlertDialog,
     AlertDialogAction,
@@ -14,7 +16,6 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { ArrowRightIcon } from "lucide-react"
 
 export default function Onboarding() {
     const [step, setStep] = useState(1)
@@ -31,30 +32,7 @@ export default function Onboarding() {
         }
     }, [])
 
-    const stepContent = [
-        {
-            title: "Welcome to coss.com",
-            description:
-                "Discover a powerful collection of components designed to enhance your development workflow.",
-        },
-        {
-            title: "Customizable Components",
-            description:
-                "Each component is fully customizable and built with modern web standards in mind.",
-        },
-        {
-            title: "Ready to Start?",
-            description:
-                "Begin building amazing interfaces with our comprehensive component library.",
-        },
-        {
-            title: "Get Support",
-            description:
-                "Access our extensive documentation and community resources to make the most of coss.com.",
-        },
-    ]
-
-    const totalSteps = stepContent.length
+    const totalSteps = onboardingSteps.length
 
     const handleContinue = () => {
         if (step < totalSteps) {
@@ -86,9 +64,9 @@ export default function Onboarding() {
             <AlertDialogContent className="gap-0 p-0">
                 <div className="space-y-6 px-6 pt-3 pb-6">
                     <AlertDialogHeader>
-                        <AlertDialogTitle>{stepContent[step - 1].title}</AlertDialogTitle>
+                        <AlertDialogTitle>{onboardingSteps[step - 1].title}</AlertDialogTitle>
                         <AlertDialogDescription>
-                            {stepContent[step - 1].description}
+                            {onboardingSteps[step - 1].description}
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">

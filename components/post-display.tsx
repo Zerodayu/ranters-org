@@ -73,7 +73,6 @@ export default function ShowPost() {
   };
 
   return (
-    <>
       <section>
         <div className='w-full flex flex-1 justify-between'>
           <div>
@@ -125,6 +124,5 @@ export default function ShowPost() {
           ))}
         </div>
       </section>
-    </>
   )
 }
